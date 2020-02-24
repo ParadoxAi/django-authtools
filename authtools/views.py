@@ -11,7 +11,7 @@ from django.contrib.auth import (
     REDIRECT_FIELD_NAME, login as auth_login
 )
 from django.contrib.auth.views import (
-    SuccessURLAllowedHostsMixin, INTERNAL_RESET_URL_TOKEN,
+    SuccessURLAllowedHostsMixin,
     INTERNAL_RESET_SESSION_TOKEN
 )
 from django.contrib.auth.decorators import login_required
@@ -28,7 +28,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, resolve_url
 from django.utils.functional import lazy
 from django.utils.http import base36_to_int, is_safe_url, urlsafe_base64_decode
-from django.utils import six
+import six
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
@@ -38,6 +38,9 @@ from django import VERSION as DJANGO_VERSION
 from .forms import AuthenticationForm
 
 User = get_user_model()
+
+
+INTERNAL_RESET_URL_TOKEN = "set-password"
 
 
 def _safe_resolve_url(url):
